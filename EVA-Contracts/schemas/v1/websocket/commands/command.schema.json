@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eva.local/schemas/v1/websocket/commands/command.schema.json",
+  "title": "EVA WebSocket Command Messages",
+  "oneOf": [
+    {
+      "title": "Command Dispatch",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "command.dispatch" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "command_id": { "type": "string", "format": "uuid" },
+                "command_name": { "type": "string", "minLength": 1 },
+                "parameters": { "type": "object" },
+                "timeout_seconds": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              },
+              "required": [
+                "command_id",
+                "command_name",
+                "parameters",
+                "timeout_seconds"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Command Accepted",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "command.accepted" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "command_id": { "type": "string", "format": "uuid" },
+                "accepted_at": { "type": "string", "format": "date-time" }
+              },
+              "required": ["command_id", "accepted_at"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Command Result",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "command.result" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "command_id": { "type": "string", "format": "uuid" },
+                "completed_at": { "type": "string", "format": "date-time" },
+                "result": { "type": "object" }
+              },
+              "required": ["command_id", "completed_at", "result"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Command Failed",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "command.failed" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "command_id": { "type": "string", "format": "uuid" },
+                "error": {
+                  "$ref": "urn:eva:contracts:v1:error"
+                }
+              },
+              "required": ["command_id", "error"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

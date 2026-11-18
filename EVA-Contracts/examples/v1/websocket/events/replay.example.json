@@ -1,0 +1,9 @@
+{
+  "message_id": "550e8400-e29b-41d4-a716-446655440024",
+  "message_type": "event.replay",
+  "protocol_version": "1.0.0",
+  "occurred_at": "2026-11-01T12:02:02Z",
+  "payload": {
+    "after_sequence_number": 10
+  }
+}

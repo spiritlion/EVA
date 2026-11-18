@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eva:contracts:v1:event-list",
+  "title": "Event List",
+  "description": "Paginated list of cluster events returned by GET /events.",
+  "type": "object",
+
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+
+    "events": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:eva:events:v1:event-envelope"
+      }
+    },
+
+    "page": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "next_cursor": {
+          "type": ["string", "null"]
+        },
+        "total": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "limit",
+        "next_cursor",
+        "total"
+      ],
+      "additionalProperties": false
+    }
+  },
+
+  "required": [
+    "contract_version",
+    "events",
+    "page"
+  ],
+
+  "additionalProperties": false
+}

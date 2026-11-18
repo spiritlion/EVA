@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eva:events:v1:event-envelope",
+  "title": "EVA Event Envelope",
+  "description": "Common envelope for events exchanged between EVA components.",
+  "type": "object",
+
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+
+    "event_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "event_type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+
+    "event_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+
+    "source": {
+      "type": "object",
+      "properties": {
+        "component": {
+          "type": "string",
+          "enum": ["core", "agent"]
+        },
+        "component_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "component",
+        "component_id"
+      ],
+      "additionalProperties": false
+    },
+
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "sequence_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "payload": {
+      "type": "object"
+    }
+  },
+
+  "required": [
+    "contract_version",
+    "event_id",
+    "event_type",
+    "event_version",
+    "source",
+    "occurred_at",
+    "sequence_number",
+    "payload"
+  ],
+
+  "additionalProperties": false
+}

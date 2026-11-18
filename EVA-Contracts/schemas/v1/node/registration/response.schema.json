@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eva:contracts:v1:node-registration-response",
+  "title": "Node Registration Response",
+  "description": "Response from EVA Core to an Agent registration request.",
+  "type": "object",
+
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+
+    "request_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "agent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_approval",
+        "approved",
+        "rejected"
+      ]
+    },
+
+    "node_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "reason": {
+      "type": "string",
+      "maxLength": 512
+    },
+
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+
+  "required": [
+    "contract_version",
+    "request_id",
+    "agent_id",
+    "status",
+    "issued_at"
+  ],
+
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "approved"
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "required": ["node_id"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "rejected"
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "required": ["reason"]
+      }
+    }
+  ],
+
+  "additionalProperties": false
+}

@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eva:contracts:v1:node-info",
+  "title": "Node Info",
+  "description": "Information about a registered node, returned by GET /nodes/{node_id}.",
+  "type": "object",
+
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+
+    "node_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "agent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "node_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "online",
+        "offline"
+      ]
+    },
+
+    "registered_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "last_seen_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+
+    "capabilities": {
+      "$ref": "urn:eva:contracts:v1:node-capabilities"
+    }
+  },
+
+  "required": [
+    "contract_version",
+    "node_id",
+    "agent_id",
+    "node_name",
+    "status",
+    "registered_at",
+    "capabilities"
+  ],
+
+  "additionalProperties": false
+}

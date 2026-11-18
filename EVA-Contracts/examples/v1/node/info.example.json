@@ -1,0 +1,46 @@
+{
+  "contract_version": "1.0.0",
+  "node_id": "550e8400-e29b-41d4-a716-446655440000",
+  "agent_id": "550e8400-e29b-41d4-a716-446655440001",
+  "node_name": "workstation-live",
+  "status": "online",
+  "registered_at": "2026-11-01T10:00:00Z",
+  "last_seen_at": "2026-11-01T12:05:00Z",
+  "capabilities": {
+    "contract_version": "1.0.0",
+    "agent_id": "550e8400-e29b-41d4-a716-446655440001",
+    "collected_at": "2026-11-01T12:00:00Z",
+    "platform": {
+      "os": "Windows",
+      "os_version": "11",
+      "architecture": "x86_64"
+    },
+    "cpu": {
+      "manufacturer": "AMD",
+      "model": "Ryzen 7 5800X",
+      "architecture": "x86_64",
+      "physical_cores": 8,
+      "logical_cores": 16,
+      "frequency_mhz": 3800
+    },
+    "memory": {
+      "total_bytes": 34359738368,
+      "type": "DDR4"
+    },
+    "gpus": [
+      {
+        "manufacturer": "NVIDIA",
+        "model": "RTX 3070",
+        "memory_bytes": 8589934592,
+        "compute_capabilities": ["sm_86"]
+      }
+    ],
+    "storage": [
+      {
+        "device_id": "disk0",
+        "type": "nvme",
+        "total_bytes": 1000204886016
+      }
+    ]
+  }
+}

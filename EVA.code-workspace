@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "EVA-Core"
+		},
+		{
+			"path": "EVA-Agent"
+		},
+		{
+			"path": "EVA-Contracts"
+		}
+	],
+	"settings": {}
+}

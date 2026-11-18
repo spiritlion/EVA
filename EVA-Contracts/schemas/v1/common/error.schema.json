@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eva:contracts:v1:error",
+  "title": "EVA Error",
+  "description": "Common error format used across EVA components.",
+  "type": "object",
+
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "code": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "message": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "correlation_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "details": {
+      "type": "object"
+    }
+  },
+
+  "required": [
+    "contract_version",
+    "code",
+    "message",
+    "retryable",
+    "occurred_at"
+  ],
+
+  "additionalProperties": false
+}

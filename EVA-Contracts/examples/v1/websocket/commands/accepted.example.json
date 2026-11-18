@@ -1,0 +1,10 @@
+{
+  "message_id": "550e8400-e29b-41d4-a716-446655440032",
+  "message_type": "command.accepted",
+  "protocol_version": "1.0.0",
+  "occurred_at": "2026-11-01T12:03:01Z",
+  "payload": {
+    "command_id": "550e8400-e29b-41d4-a716-446655440031",
+    "accepted_at": "2026-11-01T12:03:01Z"
+  }
+}

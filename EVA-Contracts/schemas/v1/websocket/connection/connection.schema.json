@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eva.local/schemas/v1/websocket/connection/connection.schema.json",
+  "title": "EVA WebSocket Connection Messages",
+  "oneOf": [
+    {
+      "title": "Connection Hello",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "connection.hello" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "agent_id": { "type": "string", "format": "uuid" },
+                "agent_version": { "type": "string", "minLength": 1 },
+                "last_acknowledged_sequence": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "agent_id",
+                "agent_version",
+                "last_acknowledged_sequence"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Connection Accepted",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "connection.accepted" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "node_id": { "type": "string", "format": "uuid" },
+                "heartbeat_interval_seconds": {
+                  "type": "integer",
+                  "minimum": 5
+                }
+              },
+              "required": [
+                "node_id",
+                "heartbeat_interval_seconds"
+              ],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Connection Rejected",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "connection.rejected" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "code": { "type": "string", "minLength": 1 },
+                "reason": { "type": "string", "minLength": 1 }
+              },
+              "required": ["code", "reason"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Connection Close",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "connection.close" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "reason": { "type": "string" }
+              },
+              "required": ["reason"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

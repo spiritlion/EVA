@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eva.local/schemas/v1/websocket/common/message-envelope.schema.json",
+  "title": "EVA WebSocket Message Envelope",
+  "description": "Common envelope for all EVA WebSocket messages.",
+  "type": "object",
+  "properties": {
+    "message_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "message_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "protocol_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "correlation_id": {
+      "type": ["string", "null"],
+      "format": "uuid"
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "message_id",
+    "message_type",
+    "protocol_version",
+    "occurred_at",
+    "payload"
+  ],
+  "unevaluatedProperties": false
+}

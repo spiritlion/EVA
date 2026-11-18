@@ -1,0 +1,12 @@
+{
+  "message_id": "550e8400-e29b-41d4-a716-446655440030",
+  "message_type": "command.dispatch",
+  "protocol_version": "1.0.0",
+  "occurred_at": "2026-11-01T12:03:00Z",
+  "payload": {
+    "command_id": "550e8400-e29b-41d4-a716-446655440031",
+    "command_name": "node.status.get",
+    "parameters": {},
+    "timeout_seconds": 30
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eva.local/schemas/v1/websocket/events/event-message.schema.json",
+  "title": "EVA WebSocket Event Messages",
+  "oneOf": [
+    {
+      "title": "Event Publish",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "event.publish" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "event": {
+                  "$ref": "urn:eva:events:v1:event-envelope"
+                }
+              },
+              "required": ["event"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Event Ack",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "event.ack" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "event_id": { "type": "string", "format": "uuid" },
+                "sequence_number": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": ["event_id", "sequence_number"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Event Replay",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "event.replay" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "after_sequence_number": {
+                  "type": "integer",
+                  "minimum": 0
+                }
+              },
+              "required": ["after_sequence_number"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

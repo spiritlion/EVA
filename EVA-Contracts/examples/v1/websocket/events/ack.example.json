@@ -1,0 +1,10 @@
+{
+  "message_id": "550e8400-e29b-41d4-a716-446655440023",
+  "message_type": "event.ack",
+  "protocol_version": "1.0.0",
+  "occurred_at": "2026-11-01T12:02:01Z",
+  "payload": {
+    "event_id": "550e8400-e29b-41d4-a716-446655440021",
+    "sequence_number": 1
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eva:contracts:v1:node-registration-request",
+  "title": "Node Registration Request",
+  "description": "Request from an EVA Agent to register a new node.",
+  "type": "object",
+
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+
+    "request_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "agent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "node_name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+
+    "platform": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+
+    "agent_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32
+    },
+
+    "requested_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+
+  "required": [
+    "contract_version",
+    "request_id",
+    "agent_id",
+    "node_name",
+    "platform",
+    "agent_version",
+    "requested_at"
+  ],
+
+  "additionalProperties": false
+}

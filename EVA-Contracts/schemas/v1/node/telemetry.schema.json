@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eva:contracts:v1:node-telemetry",
+  "title": "Node Telemetry",
+  "description": "Dynamic resource and health information reported by an EVA Agent.",
+  "type": "object",
+
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+
+    "agent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "collected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "sequence_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+
+    "cpu": {
+      "type": "object",
+      "properties": {
+        "usage_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "temperature_celsius": {
+          "type": "number"
+        }
+      },
+      "required": ["usage_percent"],
+      "additionalProperties": false
+    },
+
+    "memory": {
+      "type": "object",
+      "properties": {
+        "used_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "available_bytes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "used_bytes",
+        "available_bytes"
+      ],
+      "additionalProperties": false
+    },
+
+    "gpus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "device_id": {
+            "type": "string"
+          },
+          "usage_percent": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "memory_used_bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "temperature_celsius": {
+            "type": "number"
+          }
+        },
+        "required": ["device_id"],
+        "additionalProperties": false
+      }
+    },
+
+    "storage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "device_id": {
+            "type": "string"
+          },
+          "available_bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "device_id",
+          "available_bytes"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+
+  "required": [
+    "contract_version",
+    "agent_id",
+    "collected_at",
+    "sequence_number",
+    "cpu",
+    "memory"
+  ],
+
+  "additionalProperties": false
+}

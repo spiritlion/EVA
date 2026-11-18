@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://eva.local/schemas/v1/websocket/heartbeat/heartbeat.schema.json",
+  "title": "EVA WebSocket Heartbeat Messages",
+  "oneOf": [
+    {
+      "title": "Heartbeat Ping",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "heartbeat.ping" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "sent_at": { "type": "string", "format": "date-time" }
+              },
+              "required": ["sent_at"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Heartbeat Pong",
+      "allOf": [
+        { "$ref": "../common/message-envelope.schema.json" },
+        {
+          "properties": {
+            "message_type": { "const": "heartbeat.pong" },
+            "payload": {
+              "type": "object",
+              "properties": {
+                "ping_message_id": { "type": "string", "format": "uuid" },
+                "responded_at": { "type": "string", "format": "date-time" }
+              },
+              "required": ["ping_message_id", "responded_at"],
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

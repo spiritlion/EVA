@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:eva:contracts:v1:node-capabilities",
+  "title": "Node Capabilities",
+  "description": "Hardware capabilities reported by an EVA Agent.",
+  "type": "object",
+
+  "properties": {
+    "contract_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+
+    "agent_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+
+    "collected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+
+    "platform": {
+      "type": "object",
+      "properties": {
+        "os": {
+          "type": "string"
+        },
+        "os_version": {
+          "type": "string"
+        },
+        "architecture": {
+          "type": "string"
+        }
+      },
+      "required": ["os", "architecture"],
+      "additionalProperties": false
+    },
+
+    "cpu": {
+      "type": "object",
+      "properties": {
+        "manufacturer": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "architecture": {
+          "type": "string"
+        },
+        "physical_cores": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "logical_cores": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "frequency_mhz": {
+          "type": "number",
+          "minimum": 0
+        }
+      },
+      "required": ["logical_cores"],
+      "additionalProperties": false
+    },
+
+    "memory": {
+      "type": "object",
+      "properties": {
+        "total_bytes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": ["total_bytes"],
+      "additionalProperties": false
+    },
+
+    "gpus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "manufacturer": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "memory_bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "compute_capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          }
+        },
+        "required": ["manufacturer", "model"],
+        "additionalProperties": false
+      }
+    },
+
+    "storage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "device_id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "total_bytes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": ["device_id", "total_bytes"],
+        "additionalProperties": false
+      }
+    }
+  },
+
+  "required": [
+    "contract_version",
+    "agent_id",
+    "collected_at",
+    "platform",
+    "cpu",
+    "memory"
+  ],
+
+  "additionalProperties": false
+}

@@ -1,0 +1,9 @@
+{
+  "message_id": "550e8400-e29b-41d4-a716-446655440010",
+  "message_type": "heartbeat.ping",
+  "protocol_version": "1.0.0",
+  "occurred_at": "2026-11-01T12:01:00Z",
+  "payload": {
+    "sent_at": "2026-11-01T12:01:00Z"
+  }
+}

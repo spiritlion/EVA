@@ -1,0 +1,17 @@
+{
+  "message_id": "550e8400-e29b-41d4-a716-446655440034",
+  "message_type": "command.failed",
+  "protocol_version": "1.0.0",
+  "occurred_at": "2026-11-01T12:03:03Z",
+  "payload": {
+    "command_id": "550e8400-e29b-41d4-a716-446655440031",
+    "error": {
+      "contract_version": "1.0.0",
+      "code": "COMMAND_TIMEOUT",
+      "message": "Command execution timed out.",
+      "retryable": true,
+      "occurred_at": "2026-11-01T12:03:03Z",
+      "details": {}
+    }
+  }
+}

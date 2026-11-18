@@ -1,0 +1,10 @@
+{
+  "message_id": "550e8400-e29b-41d4-a716-446655440003",
+  "message_type": "connection.accepted",
+  "protocol_version": "1.0.0",
+  "occurred_at": "2026-11-01T12:00:01Z",
+  "payload": {
+    "node_id": "550e8400-e29b-41d4-a716-446655440004",
+    "heartbeat_interval_seconds": 15
+  }
+}

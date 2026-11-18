@@ -1,0 +1,23 @@
+{
+  "message_id": "550e8400-e29b-41d4-a716-446655440020",
+  "message_type": "event.publish",
+  "protocol_version": "1.0.0",
+  "occurred_at": "2026-11-01T12:02:00Z",
+  "payload": {
+    "event": {
+      "event_id": "550e8400-e29b-41d4-a716-446655440021",
+      "event_type": "node.status.updated",
+      "event_version": "1.0.0",
+"source": {
+                "component": "agent",
+                "component_id": "550e8400-e29b-41d4-a716-446655440022"
+            },
+            "contract_version": "1.0.0",
+      "occurred_at": "2026-11-01T12:02:00Z",
+      "sequence_number": 1,
+      "payload": {
+        "status": "online"
+      }
+    }
+  }
+}
