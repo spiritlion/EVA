@@ -1,0 +1,89 @@
+components:
+  schemas:
+    RegistrationRequest:
+      type: object
+      required:
+        - contract_version
+        - request_id
+        - agent_id
+        - node_name
+        - platform
+        - agent_version
+        - requested_at
+      properties:
+        contract_version:
+          type: string
+        request_id:
+          type: string
+          format: uuid
+        agent_id:
+          type: string
+          format: uuid
+        node_name:
+          type: string
+          minLength: 1
+        platform:
+          type: string
+          minLength: 1
+        agent_version:
+          type: string
+          minLength: 1
+        requested_at:
+          type: string
+          format: date-time
+
+    RegistrationResponse:
+      type: object
+      required:
+        - contract_version
+        - request_id
+        - agent_id
+        - status
+        - issued_at
+      properties:
+        contract_version:
+          type: string
+        request_id:
+          type: string
+          format: uuid
+        agent_id:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [pending_approval, approved, rejected]
+        node_id:
+          type: string
+          format: uuid
+        reason:
+          type: string
+        issued_at:
+          type: string
+          format: date-time
+
+    ErrorResponse:
+      type: object
+      required:
+        - contract_version
+        - code
+        - message
+        - retryable
+        - occurred_at
+      properties:
+        contract_version:
+          type: string
+        code:
+          type: string
+        message:
+          type: string
+        retryable:
+          type: boolean
+        occurred_at:
+          type: string
+          format: date-time
+        correlation_id:
+          type: string
+          format: uuid
+        details:
+          type: object
+          additionalProperties: true
