@@ -8,9 +8,11 @@ from aiohttp import web
 from aiohttp_swagger3 import SwaggerDocs, SwaggerInfo, SwaggerUiSettings
 
 from eva.config import Config
+from eva.storage import Registry
 
 CONFIG_KEY: web.AppKey[Config] = web.AppKey("eva.config", Config)
 SWAGGER_KEY: web.AppKey[SwaggerDocs] = web.AppKey("eva.swagger", SwaggerDocs)
+REGISTRY_KEY: web.AppKey[Registry] = web.AppKey("eva.registry", Registry)
 
 COMPONENTS_FILE = Path(__file__).resolve().parent / "swagger_components.yaml"
 
@@ -27,6 +29,7 @@ def create_app(config: Config | None = None) -> web.Application:
     app_config = config or Config()
     app = web.Application()
     app[CONFIG_KEY] = app_config
+    app[REGISTRY_KEY] = Registry()
 
     swagger = SwaggerDocs(
         app,

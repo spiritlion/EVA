@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eva-agent"
+version = "0.1.0"
+description = "EVA Agent — представитель устройства в кластере EVA"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.11,<4"
+]
+
+[project.scripts]
+eva-agent = "eva_agent.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

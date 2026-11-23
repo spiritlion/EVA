@@ -37,3 +37,21 @@ class Config:
             / "registration"
             / "request.schema.json"
         )
+
+    def _node_schema(self, name: str) -> Path:
+        return self.contracts_dir / "schemas" / "v1" / "node" / name
+
+    @property
+    def node_info_schema_path(self) -> Path:
+        """Путь к схеме информации об узле (info.schema.json)."""
+        return self._node_schema("info.schema.json")
+
+    @property
+    def capabilities_schema_path(self) -> Path:
+        """Путь к схеме возможностей узла (capabilities.schema.json)."""
+        return self._node_schema("capabilities.schema.json")
+
+    @property
+    def telemetry_schema_path(self) -> Path:
+        """Путь к схеме телеметрии узла (telemetry.schema.json)."""
+        return self._node_schema("telemetry.schema.json")

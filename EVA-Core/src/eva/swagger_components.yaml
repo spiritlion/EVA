@@ -87,3 +87,136 @@ components:
         details:
           type: object
           additionalProperties: true
+
+    Capabilities:
+      type: object
+      required: [contract_version, agent_id, collected_at, platform, cpu, memory]
+      properties:
+        contract_version:
+          type: string
+        agent_id:
+          type: string
+          format: uuid
+        collected_at:
+          type: string
+          format: date-time
+        platform:
+          type: object
+          required: [os, architecture]
+          properties:
+            os: { type: string }
+            os_version: { type: string }
+            architecture: { type: string }
+        cpu:
+          type: object
+          required: [logical_cores]
+          properties:
+            manufacturer: { type: string }
+            model: { type: string }
+            architecture: { type: string }
+            physical_cores: { type: integer, minimum: 1 }
+            logical_cores: { type: integer, minimum: 1 }
+            frequency_mhz: { type: number, minimum: 0 }
+        memory:
+          type: object
+          required: [total_bytes]
+          properties:
+            total_bytes: { type: integer, minimum: 0 }
+            type: { type: string }
+        gpus:
+          type: array
+          items:
+            type: object
+            required: [manufacturer, model]
+            properties:
+              manufacturer: { type: string }
+              model: { type: string }
+              memory_bytes: { type: integer, minimum: 0 }
+              compute_capabilities:
+                type: array
+                items: { type: string }
+        storage:
+          type: array
+          items:
+            type: object
+            required: [device_id, total_bytes]
+            properties:
+              device_id: { type: string }
+              type: { type: string }
+              total_bytes: { type: integer, minimum: 0 }
+
+    Telemetry:
+      type: object
+      required: [contract_version, agent_id, collected_at, sequence_number, cpu, memory]
+      properties:
+        contract_version:
+          type: string
+        agent_id:
+          type: string
+          format: uuid
+        collected_at:
+          type: string
+          format: date-time
+        sequence_number:
+          type: integer
+          minimum: 1
+        cpu:
+          type: object
+          required: [usage_percent]
+          properties:
+            usage_percent: { type: number, minimum: 0, maximum: 100 }
+            temperature_celsius: { type: number }
+        memory:
+          type: object
+          required: [used_bytes, available_bytes]
+          properties:
+            used_bytes: { type: integer, minimum: 0 }
+            available_bytes: { type: integer, minimum: 0 }
+        gpus:
+          type: array
+          items:
+            type: object
+            required: [device_id]
+            properties:
+              device_id: { type: string }
+              usage_percent: { type: number, minimum: 0, maximum: 100 }
+              memory_used_bytes: { type: integer, minimum: 0 }
+              temperature_celsius: { type: number }
+        storage:
+          type: array
+          items:
+            type: object
+            required: [device_id, available_bytes]
+            properties:
+              device_id: { type: string }
+              available_bytes: { type: integer, minimum: 0 }
+
+    NodeInfo:
+      type: object
+      required: [contract_version, node_id, agent_id, node_name, status, registered_at, capabilities]
+      properties:
+        contract_version:
+          type: string
+        node_id:
+          type: string
+          format: uuid
+        agent_id:
+          type: string
+          format: uuid
+        node_name:
+          type: string
+          minLength: 1
+        status:
+          type: string
+          enum: [pending, online, offline]
+        registered_at:
+          type: string
+          format: date-time
+        last_seen_at:
+          type: string
+          format: date-time
+          nullable: true
+        capabilities:
+          $ref: '#/components/schemas/Capabilities'
+        telemetry:
+          $ref: '#/components/schemas/Telemetry'
