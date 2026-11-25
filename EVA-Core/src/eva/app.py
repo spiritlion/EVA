@@ -26,7 +26,7 @@ def create_app(config: Config | None = None) -> web.Application:
     validate=False: валидация запросов выполняется в EVA по контрактам
     (eva.validation), а не повторно через SwaggerRoute.
     """
-    app_config = config or Config()
+    app_config = config or Config.load()
     app = web.Application()
     app[CONFIG_KEY] = app_config
     app[REGISTRY_KEY] = Registry()

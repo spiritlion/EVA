@@ -1,12 +1,19 @@
 {
 	"folders": [
 		{
+			"name": "EVA",
+			"path": "."
+		},
+		{
+			"name": "EVA-Core",
 			"path": "EVA-Core"
 		},
 		{
+			"name": "EVA-Agent",
 			"path": "EVA-Agent"
 		},
 		{
+			"name": "EVA-Contracts",
 			"path": "EVA-Contracts"
 		}
 	],

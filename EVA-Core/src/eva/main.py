@@ -10,7 +10,7 @@ from eva.config import Config
 
 def main() -> None:
     """Запускает EVA-Core HTTP-сервер."""
-    config = Config()
+    config = Config.load()
     app = create_app(config)
     web.run_app(
         app,

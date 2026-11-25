@@ -1,0 +1,5 @@
+[core]
+host = "127.0.0.1"
+port = 8080
+# Путь к каталогу контрактов EVA-Contracts
+# contracts_dir = "../EVA-Contracts"
