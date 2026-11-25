@@ -24,3 +24,4 @@ htmlcov/
 
 # MultiTool / tooling data
 .gigatool/
+.github/SETUP_GITHUB.md

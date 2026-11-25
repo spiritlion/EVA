@@ -1,0 +1,65 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  contracts:
+    name: Validate Contracts
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: EVA-Contracts
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: EVA-Contracts/tools/requirements.txt
+      - name: Install dependencies
+        run: pip install -r tools/requirements.txt
+      - name: Validate schemas
+        run: python tools/validate_schemas.py
+      - name: Validate examples
+        run: python tools/validate_examples.py
+      - name: Validate refs
+        run: python tools/validate_refs.py
+
+  core:
+    name: Test EVA-Core
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: EVA-Core
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: EVA-Core/pyproject.toml
+      - name: Install package
+        run: pip install -e .
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+  agent:
+    name: Test EVA-Agent
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: EVA-Agent
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: EVA-Agent/pyproject.toml
+      - name: Install package
+        run: pip install -e .
+      - name: Check imports
+        run: python -c "import eva_agent; print('agent ok')"
